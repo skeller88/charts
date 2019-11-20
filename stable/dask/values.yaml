@@ -55,6 +55,7 @@ worker:
   default_resources:  # overwritten by resource limits if they exist
     cpu: 1
     memory: "4GiB"
+  args: {}
   env:
   #  - name: EXTRA_CONDA_PACKAGES
   #    value: numba xarray -c conda-forge

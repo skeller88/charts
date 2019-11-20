@@ -34,10 +34,12 @@ spec:
             - {{ .Values.worker.image.dask_worker }}
             - {{ template "dask.fullname" . }}-scheduler:{{ .Values.scheduler.servicePort }}
           {{- if .Values.worker.resources.limits }}
-            - --nthreads
-            - {{ .Values.worker.resources.limits.cpu | default .Values.worker.default_resources.cpu | quote }}
             - --memory-limit
             - {{ .Values.worker.resources.limits.memory | default .Values.worker.default_resources.memory | quote }}
+          {{- end }}
+          {{- if .Values.worker.args }}
+            - --nthreads
+            - {{ .Values.worker.nthreads | default .Values.worker.default_resources.cpu | quote }}
           {{- end }}
             - --no-bokeh
           ports:
